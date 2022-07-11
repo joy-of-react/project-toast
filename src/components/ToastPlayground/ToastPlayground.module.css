@@ -1,0 +1,122 @@
+.wrapper {
+  padding: 64px 32px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.wrapper header {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 64px;
+  min-height: 300px;
+}
+
+.wrapper header h1 {
+  position: relative;
+  font-size: 4.25rem;
+  line-height: 1.1;
+  padding-bottom: 32px;
+  color: white;
+  /* prettier-ignore */
+  text-shadow:
+    0px 0px 10px hsl(250deg 40% 16% / 0.5),
+    0px 0px 20px hsl(250deg 40% 16% / 0.5),
+    0px 0px 40px hsl(250deg 40% 16% / 0.5);
+}
+
+.wrapper header img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: 250px;
+}
+
+.controlsWrapper {
+  color-scheme: light;
+  outline: 2px dashed hsl(250deg 80% 80% / 0.6);
+  outline-offset: 4px;
+  border-radius: 4px;
+  background: white;
+  color: black;
+  padding: 16px;
+  margin-top: 32px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  /*
+    This is the height when a row contains a text input.
+    We specify it to prevent a layout shift when `dismiss-after`
+    is toggled on/off.
+  */
+  min-height: 3rem;
+}
+
+.row:not(:last-of-type) {
+  padding-bottom: 16px;
+  border-bottom: 1px dotted hsl(250deg 80% 80% / 0.5);
+  margin-bottom: 16px;
+}
+
+.titleMessageWrapper {
+  padding-bottom: 16px;
+  border-bottom: 1px dotted hsl(250deg 80% 80% / 0.5);
+  margin-bottom: 16px;
+}
+.titleMessageRow {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.titleMessageRow:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
+.label {
+  flex-basis: 160px;
+  text-align: right;
+  font-weight: 700;
+}
+
+.inputWrapper {
+  flex: 1;
+}
+
+.radioWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.radioWrapper label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100px;
+}
+
+.titleInput {
+  display: block;
+  width: 100%;
+}
+.messageInput {
+  display: block;
+  width: 100%;
+  height: 4rem;
+}
+
+.secondsInput {
+  width: 3rem;
+  padding: 0px;
+  margin: 0px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid hsl(250deg 50% 40%);
+  text-align: center;
+}
