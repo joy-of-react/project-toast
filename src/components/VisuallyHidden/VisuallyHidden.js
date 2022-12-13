@@ -2,7 +2,11 @@ import React from 'react';
 
 import styles from './VisuallyHidden.module.css';
 
-const VisuallyHidden = ({ children, className, ...delegated }) => {
+const VisuallyHidden = ({
+  children,
+  className = '',
+  ...delegated
+}) => {
   const [forceShow, setForceShow] = React.useState(false);
 
   React.useEffect(() => {
@@ -21,18 +25,26 @@ const VisuallyHidden = ({ children, className, ...delegated }) => {
       window.addEventListener('keyup', handleKeyUp);
 
       return () => {
-        window.removeEventListener('keydown', handleKeyDown);
+        window.removeEventListener(
+          'keydown',
+          handleKeyDown
+        );
         window.removeEventListener('keydown', handleKeyUp);
       };
     }
   }, []);
 
   if (forceShow) {
-    return <div className={styles.showWrapper}>{children}</div>;
+    return (
+      <div className={styles.showWrapper}>{children}</div>
+    );
   }
 
   return (
-    <div className={`${className} ${styles.wrapper}`} {...delegated}>
+    <div
+      className={`${className} ${styles.wrapper}`}
+      {...delegated}
+    >
       {children}
     </div>
   );

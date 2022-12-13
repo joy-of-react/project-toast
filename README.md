@@ -167,50 +167,91 @@ In this exercise, we'll refactor our application to use the [“Provider compone
 
 Our component so far works pretty well for sighted mouse users, but the experience isn't as great for everyone else.
 
-For keyboard users, let's add a global event handler that listens for the “escape” key, and dismisses _all_ toasts when it's pressed.
+In this exercise, we'll improve the experience for two different groups of people:
 
-For screen-reader users, we need to change some things in our markup.
+- Sighted keyboard users
+- Users who use a screen reader
 
-In the solution video, I'll share details about _why_ we're making these changes. For now, your mission is to apply the following changes.
+### 5.1: Keyboard users
 
-**NOTE: these changes are shown in HTML.** You'll need to migrate it to JSX.
+Let's try something. Pretend that you don't have a mouse or trackpad. Using the keyboard alone, can you create and dismiss a toast message?
 
-In `ToastShelf.js`, add the following 3 attributes to the wrapping `<ol>`, so that the markup looks like this:
+**Give it a shot now, in browser.**
+
+**How do I do this?** You'll use the “Tab” key to move focus between interactive elements. You can hold "Shift" and hit "Tab" to move backwards. In order to dismiss the toasts, you'll need to keep tabbing until your focus reaches the close button. Then, hit "Enter".
+
+> NOTE: If you're using Safari or Firefox on MacOS, you'll need to toggle a system setting to allow tabs to focus on buttons. Read more here: https://www.scottohara.me/blog/2014/10/03/link-tabbing-firefox-osx.html
+
+---
+
+Well, what did you think?
+
+I found that this experience was pretty annoying. It was difficult to get the focus to reach the close buttons.
+
+When we built a modal from scratch, we moved focus to within the modal, and trapped it there. This is a good idea for modals (which are urgent and blocking), but it's not the right approach for toasts (which are non-urgent and passive). Moving the user's focus is a pretty aggressive move, and not something we should do unless it's necessary.
+
+**So, here's what we should do:** Let's wire up the "Escape" key to automatically dismiss all toasts.
+
+That way, we aren't interrupting the user. They can read the messages in their own time, and hit "Escape" to dismiss them, without them needing to fuss with tab navigation at all.
+
+**Acceptance Criteria:**
+
+- Hitting the "Escape" key should dismiss all toasts
+- You'll want to do this with a `useEffect` hook, but it's up to you to decide which component should bear this responsibility.
+
+### 5.2: Screen reader users
+
+A screen reader is a piece of software that narrates the page. They're primarily used by folks who are blind or have low vision (though screen readers are also useful for folks with cognitive disabilities).
+
+Understanding how to use screen readers is a bit beyond the scope of this course, so I won't ask you to test things with a screen reader.
+
+Let's imagine we reach out to an accessibility specialist, and they do us the favor of converting our HTML to be screen-reader-friendly.
+
+**Here are the changes we need to make:**
 
 ```diff
 <ol
-  class="wrapper"
+  class="ToastShelf_wrapper"
 + role="region"
 + aria-live="assertive"
 + aria-label="Notification"
 >
+  <li class="ToastShelf_toastWrapper">
+    <div class="Toast_toast Toast_error">
+      <div class="Toast_iconContainer">
+        <!-- Variant SVG icon -->
+      </div>
+      <p class="Toast_content">
++       <div class="VisuallyHidden_wrapper">
++         error -
++       </div>
+        Something went wrong! Please contact customer support
+      </p>
+      <button
+        class="Toast_closeButton"
++       aria-label="Dismiss message"
++       aria-live="off"
+      >
+        <!-- Close SVG icon -->
+-       <div class="VisuallyHidden_wrapper">
+-         Dismiss message
+-       </div>
+      </button>
+    </div>
+  </li>
+</ol>
 ```
 
-In `Toast.js`, make the following changes:
+**NOTE: This diff shows the _HTML_.** Pretend that this is an HTML snippet given to you by an accessibility consultant who doesn't know React. Your job is to integrate their suggestions into our React components.
 
-- Within the paragraph that holds the message content, prefix it with the toast's variant, so that the final output looks something like this:
+**Curious about these changes?** In the solution video, I'll share exactly why each of these changes are necessary. I realize it probably seems pretty arbitrary right now 😅 but all will be explained in the video.
 
-```diff
-<p class="content">
-+ <span class="visually-hidden">error -</span>
-  Your account could not be found
-</p>
-```
+**Acceptance Criteria:**
 
-- Update the close button so that it uses an `aria-label` instead of the `<VisuallyHidden>` helper:
-
-```diff
-<button
-  class="closeButton"
-+ aria-label="Dismiss message"
-+ aria-live="off"
->
-  <svg>X</svg>
-- <span class="visually-hidden">Dismiss message</span>
-</button>
-```
-
-As I mentioned: I know these changes seem totally arbitrary, but don't worry! I'll explain everything in the solution video. 😄
+- The `<ol>` should have the specified role / aria tags
+- The toast's content should be prefixed with the variant, using the `VisuallyHidden` component.
+  - _NOTE:_ The diff above shows an _error_ toast, but the prefix should be dynamic, based on the variant.
+- The “Dismiss message” content in the close button should be moved to an `aria-label`. `aria-live` should also be set to "off".
 
 ---
 
