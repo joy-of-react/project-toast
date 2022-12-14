@@ -25,28 +25,20 @@ const VisuallyHidden = ({
       window.addEventListener('keyup', handleKeyUp);
 
       return () => {
-        window.removeEventListener(
-          'keydown',
-          handleKeyDown
-        );
+        window.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('keydown', handleKeyUp);
       };
     }
   }, []);
 
   if (forceShow) {
-    return (
-      <div className={styles.showWrapper}>{children}</div>
-    );
+    return <span className={styles.showWrapper}>{children}</span>;
   }
 
   return (
-    <div
-      className={`${className} ${styles.wrapper}`}
-      {...delegated}
-    >
+    <span className={`${className} ${styles.wrapper}`} {...delegated}>
       {children}
-    </div>
+    </span>
   );
 };
 
