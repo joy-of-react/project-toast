@@ -26,7 +26,7 @@ const VisuallyHidden = ({
 
       return () => {
         window.removeEventListener('keydown', handleKeyDown);
-        window.removeEventListener('keydown', handleKeyUp);
+        window.removeEventListener('keyup', handleKeyUp);
       };
     }
   }, []);
