@@ -1,6 +1,8 @@
 import React from "react";
 
 import Button from "../Button";
+import Toast from "../Toast/Toast";
+import { useToasts } from "../ToastProvider/ToastProvider";
 
 import styles from "./ToastPlayground.module.css";
 
@@ -9,10 +11,13 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [message, setMessage] = React.useState("");
+  const { showToast } = useToasts();
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log({ variant, message });
+    showToast( variant, message );
+    setVariant(VARIANT_OPTIONS[0]);
+    setMessage("");
   }
 
   return (
@@ -21,6 +26,9 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+      <section aria-label="Preview toast">
+        <Toast variant={variant}>{message}</Toast>
+      </section>
 
       <form className={styles.controlsWrapper} onSubmit={handleSubmit}>
         <div className={styles.row}>
@@ -36,7 +44,7 @@ function ToastPlayground() {
               id="message"
               className={styles.messageInput}
               value={message}
-              onChange={({target: {value}}) => setMessage(value)}
+              onChange={({ target: { value } }) => setMessage(value)}
             />
           </div>
         </div>
