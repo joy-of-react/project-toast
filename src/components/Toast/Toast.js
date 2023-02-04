@@ -6,7 +6,6 @@ import {
   Info,
   X,
 } from "react-feather";
-import { useToasts } from "../ToastProvider/ToastProvider";
 
 import VisuallyHidden from "../VisuallyHidden";
 

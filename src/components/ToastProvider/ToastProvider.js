@@ -1,7 +1,7 @@
 import React from "react";
-import Toast from "../Toast/Toast";
+import ToastShelf from "../ToastShelf/ToastShelf";
 
-const ToastContext = React.createContext([]);
+const ToastContext = React.createContext({});
 
 export function useToasts() {
   return React.useContext(ToastContext);
@@ -26,24 +26,7 @@ function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          right: 0,
-          background: "transparent",
-        }}
-      >
-        {toasts.map((toast) => (
-          <Toast
-            key={toast.id}
-            variant={toast.variant}
-            handleDismiss={() => clearToast(toast.id)}
-          >
-            {toast.message}
-          </Toast>
-        ))}
-      </div>
+      <ToastShelf handleDismiss={clearToast} toasts={toasts} />
     </ToastContext.Provider>
   );
 }
