@@ -13,6 +13,8 @@
   gap: 16px;
   padding: 16px;
   list-style-type: none;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .toastWrapper {

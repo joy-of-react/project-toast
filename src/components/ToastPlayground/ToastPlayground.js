@@ -8,6 +8,15 @@ import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
+function* count() {
+  let c = 1;
+  while (true) {
+    yield c++;
+  }
+}
+
+const counter = count();
+
 function ToastPlayground() {
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [message, setMessage] = React.useState("");
@@ -15,9 +24,9 @@ function ToastPlayground() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    showToast( variant, message );
+    showToast(variant, message);
     setVariant(VARIANT_OPTIONS[0]);
-    setMessage("");
+    setMessage("Message" + counter.next().value);
   }
 
   return (
