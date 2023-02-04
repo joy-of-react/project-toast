@@ -48,7 +48,12 @@ function ToastShelf({ toasts, handleDismiss }) {
 
   return (
     <FocusLock disabled={!isFocusLocked} returnFocus>
-      <ol className={styles.wrapper}>
+      <ol
+        className={styles.wrapper}
+        aria-live="assertive"
+        aria-label="Notifications"
+        role="region"
+      >
         {toasts.map((toast, i) => (
           <li className={styles.toastWrapper} key={toast.id}>
             <Toast
