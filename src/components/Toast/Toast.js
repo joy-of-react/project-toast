@@ -44,4 +44,4 @@ function Toast({ id, variant, children }) {
   );
 }
 
-export default Toast;
+export default React.memo(Toast);
