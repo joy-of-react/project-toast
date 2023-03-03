@@ -1,4 +1,4 @@
-.toast {
+/* .toast {
   position: relative;
   display: flex;
   align-items: center;
@@ -10,13 +10,7 @@
   max-width: 100%;
   width: 350px;
   box-shadow: var(--shadow-elevation-medium);
-}
-
-.content {
-  flex: 1;
-  padding: 12px 0px;
-  font-weight: 600;
-}
+} */
 
 .iconContainer {
   flex-shrink: 0;
@@ -30,14 +24,6 @@
 .title {
   font-weight: 700;
   margin-bottom: 4px;
-}
-
-.closeButton {
-  flex-shrink: 0;
-  border: none;
-  background: transparent;
-  padding: 16px;
-  cursor: pointer;
 }
 
 .notice {
