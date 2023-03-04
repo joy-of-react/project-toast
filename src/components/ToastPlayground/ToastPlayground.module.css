@@ -101,22 +101,8 @@
   width: 100px;
 }
 
-.titleInput {
-  display: block;
-  width: 100%;
-}
 .messageInput {
   display: block;
   width: 100%;
   height: 4rem;
-}
-
-.secondsInput {
-  width: 3rem;
-  padding: 0px;
-  margin: 0px;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid hsl(250deg 50% 40%);
-  text-align: center;
 }

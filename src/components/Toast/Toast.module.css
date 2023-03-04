@@ -27,11 +27,6 @@
   display: block;
 }
 
-.title {
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
 .closeButton {
   flex-shrink: 0;
   border: none;

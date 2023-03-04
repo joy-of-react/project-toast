@@ -213,7 +213,7 @@ Let's imagine we reach out to an accessibility specialist, and they do us the fa
 <ol
   class="ToastShelf_wrapper"
 + role="region"
-+ aria-live="assertive"
++ aria-live="polite"
 + aria-label="Notification"
 >
   <li class="ToastShelf_toastWrapper">
