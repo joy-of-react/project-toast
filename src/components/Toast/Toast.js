@@ -21,12 +21,12 @@ const ICONS_BY_VARIANT = {
 
 function Toast({ toastId, variant, children }) {
   const Icon = ICONS_BY_VARIANT[variant];
-  const { toasts, setToasts, dismissToast } = React.useContext(ToastCtx);
+  const { dismissToast } = React.useContext(ToastCtx);
 
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
-        <Icon />
+        <Icon size={24} />
       </div>
       <VisuallyHidden>{variant + " -"}</VisuallyHidden>
       <p className={styles.content}>{children}</p>

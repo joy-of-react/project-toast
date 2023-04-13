@@ -7,7 +7,7 @@ export const ToastCtx = React.createContext();
 function ToastProvider({ children }) {
   const [toasts, setToasts] = React.useState([]);
   // toasts = [{id: '', message: '', variant:''}, ...]
-  useEscapeKey(setToasts);
+  useEscapeKey(React.useCallback(() => setToasts([]), []));
 
   function addToast(toast) {
     const nextToasts = [...toasts, toast];
@@ -22,7 +22,7 @@ function ToastProvider({ children }) {
   }
 
   return (
-    <ToastCtx.Provider value={{ toasts, setToasts, dismissToast, addToast }}>
+    <ToastCtx.Provider value={{ toasts, dismissToast, addToast }}>
       {children}
     </ToastCtx.Provider>
   );
