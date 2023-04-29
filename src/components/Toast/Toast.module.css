@@ -1,3 +1,6 @@
+.hidden {
+  display: none;
+}
 .toast {
   position: relative;
   display: flex;
