@@ -15,7 +15,16 @@ function ToastShelf({ children }) {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [setToastsInShelf]);
-  return <ol className={styles.wrapper}>{children}</ol>;
+  return (
+    <ol
+      className={styles.wrapper}
+      role="region"
+      aria-live="polite"
+      aria-label="Notification"
+    >
+      {children}
+    </ol>
+  );
 }
 
 export default ToastShelf;

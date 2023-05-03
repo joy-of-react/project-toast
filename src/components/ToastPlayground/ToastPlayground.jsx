@@ -1,6 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { ToastContext } from '../ToastProvider/';
+import { ToastContext } from '../ToastProvider';
 import Button from '../Button';
 import styles from './ToastPlayground.module.css';
 import Toast from '../Toast';
