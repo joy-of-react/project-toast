@@ -18,6 +18,10 @@ function ToastPlayground() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (playgroundSelectedOptions.message === '') {
+      return;
+    }
+
     const newToast = {
       id: uuidv4(),
       message: playgroundSelectedOptions.message,
@@ -36,21 +40,7 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-      <ToastShelf>
-        {toastsInShelf.map((toast) => (
-          <li key={toast.id} className={styles.toastWrapper}>
-            <Toast
-              message={toast.message}
-              variant={toast.variant}
-              onDismiss={() => {
-                setToastsInShelf(
-                  toastsInShelf.filter((t) => t.id !== toast.id)
-                );
-              }}
-            />
-          </li>
-        ))}
-      </ToastShelf>
+      <ToastShelf toasts={toastsInShelf} />
       <form onSubmit={handleSubmit}>
         <div className={styles.controlsWrapper}>
           <div className={styles.row}>
