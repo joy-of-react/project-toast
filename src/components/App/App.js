@@ -1,15 +1,21 @@
 import React from 'react';
-
-import ToastPlayground from '../ToastPlayground';
+import Header from '../Header/Header';
+import ToastPlayground from '../ToastPlayground/ToastPlayground';
 import Footer from '../Footer';
+import ToastProvider from '../ToastProvider/ToastProvider';
+
+import styles from '../ToastPlayground/ToastPlayground.module.css'
+
 
 function App() {
   return (
-    <>
-      <div>Test</div>
-      <ToastPlayground />
-      <Footer />
-    </>
+    <ToastProvider>
+      <div className={styles.wrapper}>
+        <Header />
+        <ToastPlayground />
+        <Footer />
+      </div>
+    </ToastProvider>
   );
 }
 
