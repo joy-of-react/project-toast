@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import Button from '../Button/Button'
 import RadioBtn from '../RadioBtn/RadioBtn';
@@ -8,7 +8,6 @@ import styles from '../ToastPlayground/ToastPlayground.module.css'
 import { ToastContext } from '../ToastProvider/ToastProvider';
 
 export const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
-export const VariantContext = createContext();
 
 function ToastPlayground() {
     const { createToast } = useContext(ToastContext);
@@ -25,14 +24,8 @@ function ToastPlayground() {
         setVariant(VARIANT_OPTIONS[0]);
     }
 
-
-    const variantValue = {
-        variant,
-        setVariant,
-    };
-
     return (
-        <VariantContext.Provider value={variantValue}>
+        <>
             <ToastShelf />
             <form className={styles.controlsWrapper} onSubmit={handleCreateToast}>
                 <label
@@ -50,7 +43,7 @@ function ToastPlayground() {
                     <div className={styles.label}>Variant</div>
                     {VARIANT_OPTIONS.map((option, index) => {
                         return (
-                            <RadioBtn key={index} option={option} />
+                            <RadioBtn key={index} option={option} variant={variant} setVariant={setVariant} />
                         )
                     })}
                 </div>
@@ -64,7 +57,7 @@ function ToastPlayground() {
                     </div>
                 </div>
             </form>
-        </VariantContext.Provider>
+        </>
     )
 }
 

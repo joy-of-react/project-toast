@@ -1,25 +1,21 @@
-import React, { useContext } from "react";
 import styles from '../ToastPlayground/ToastPlayground.module.css'
-import { VariantContext } from "../ToastPlayground/ToastPlayground";
 
-function RadioBtn({ option, ...delegated }) {
+function RadioBtn({ option, variant, setVariant }) {
   const btnId = `variant-${option}`;
-  const variantContext = useContext(VariantContext);
-  
+
   return (
     <div
       className={`${styles.inputWrapper} ${styles.radioWrapper}`}
     >
       <label htmlFor={btnId}>
         <input
-          {...delegated}
           id={btnId}
           type="radio"
           name="variant"
           value={option}
-          checked={option === variantContext.variant}
+          checked={option === variant}
           onChange={(event) => {
-            variantContext.setVariant(event.target.value)
+            setVariant(event.target.value)
           }}
         />
         {option}
