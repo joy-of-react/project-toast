@@ -19,7 +19,7 @@ To jog your memory, here are the terminal commands you'll need to run:
 npm install
 
 # Run a development server:
-npm run start
+npm run dev
 ```
 
 To create new components, you can use this helper script. It saves you a bit of time, creating all the files and adding the standard code:
