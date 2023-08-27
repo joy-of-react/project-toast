@@ -8,7 +8,7 @@ In this project, we'll dive deep into the implementation of a single common UI c
 
 ## Getting Started
 
-This project is created with create-react-app. It's intended to be run locally, on your computer, using Node.js and NPM.
+This project is created with Parcel. It's intended to be run locally, on your computer, using Node.js and NPM.
 
 During the first project, Wordle, we saw how to run a local development server. If you're not quite sure how to get started, I recommend reviewing the [“Local Development” instructions](https://courses.joshwcomeau.com/joy-of-react/project-wordle/03-dev-server) lesson.
 
@@ -19,7 +19,7 @@ To jog your memory, here are the terminal commands you'll need to run:
 npm install
 
 # Run a development server:
-npm run start
+npm run dev
 ```
 
 To create new components, you can use this helper script. It saves you a bit of time, creating all the files and adding the standard code:
@@ -28,6 +28,12 @@ To create new components, you can use this helper script. It saves you a bit of 
 # Create a new component:
 npm run new-component [TheNewComponentName]
 ```
+
+## Troubleshooting
+
+If you run into any weird errors when trying to run a development server, start by deleting the `.parcel-cache` directory. This directory holds temporary automatically-generated files, and sometimes things get out of sync, and they need to be deleted.
+
+If you're still experiencing issues after deleting `.parcel-cache`, you can share the error message and any additional details in Discord.
 
 ---
 

@@ -4,40 +4,22 @@
   "private": true,
   "author": "Josh Comeau <me@joshwcomeau.com>",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "new-component": "^4.0.1",
-    "prettier": "^2.7.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-feather": "^2.0.10",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "new-component": "^5",
+    "parcel": "2.9.3",
+    "parcel-reporter-static-files-copy": "^1.5.2",
+    "prettier": "2.6.2",
+    "process": "0.11.10",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-feather": "^2.0.10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "new-component": "new-component",
-    "eject": "react-scripts eject"
+    "dev": "parcel public/index.html",
+    "build": "parcel build public/index.html",
+    "new-component": "new-component"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "staticFiles": {
+    "staticPath": "assets"
   }
 }
