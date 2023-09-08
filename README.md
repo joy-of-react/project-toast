@@ -8,7 +8,7 @@ In this project, we'll dive deep into the implementation of a single common UI c
 
 ## Getting Started
 
-This project is created with Parcel. It's intended to be run locally, on your computer, using Node.js and NPM.
+This project is created with [Parcel](https://parceljs.org/). It's intended to be run locally, on your computer, using Node.js and NPM.
 
 During the first project, Wordle, we saw how to run a local development server. If you're not quite sure how to get started, I recommend reviewing the [“Local Development” instructions](https://courses.joshwcomeau.com/joy-of-react/project-wordle/03-dev-server) lesson.
 
