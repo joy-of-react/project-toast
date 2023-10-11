@@ -6,11 +6,15 @@ import RadioButton from "../RadioButton"
 import Toast from "../Toast"
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"]
-
 function ToastPlayground() {
   const [variant, setVariant] = React.useState("")
   const [message, setMessage] = React.useState("")
   const [showToast, setShowToast] = React.useState(false)
+
+  function handleDismiss() {
+    setShowToast(false)
+  }
+
   return (
     <div className={styles.wrapper}>
       <header>
@@ -24,7 +28,7 @@ function ToastPlayground() {
         <Toast
           message={message}
           variant={variant}
-          setShowToast={setShowToast}
+          handleDismiss={handleDismiss}
         />
       )}
       <div className={styles.controlsWrapper}>
