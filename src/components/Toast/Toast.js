@@ -1,38 +1,47 @@
-import React from 'react';
+import React from 'react'
 import {
   AlertOctagon,
   AlertTriangle,
   CheckCircle,
   Info,
   X,
-} from 'react-feather';
+} from 'react-feather'
 
-import VisuallyHidden from '../VisuallyHidden';
+import VisuallyHidden from '../VisuallyHidden'
 
-import styles from './Toast.module.css';
+import styles from './Toast.module.css'
 
 const ICONS_BY_VARIANT = {
   notice: Info,
   warning: AlertTriangle,
   success: CheckCircle,
   error: AlertOctagon,
-};
+}
 
-function Toast() {
-  return (
-    <div className={`${styles.toast} ${styles.notice}`}>
+function Toast({ formInput, setFormInput }) {
+  const { message, variant, preview } = formInput
+  const Variant = ICONS_BY_VARIANT[variant]
+
+  return preview ? (
+    <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
-        <Info size={24} />
+        <Variant size={24} />
       </div>
-      <p className={styles.content}>
-        16 photos have been uploaded
-      </p>
+      <p className={styles.content}>{message}</p>
       <button className={styles.closeButton}>
-        <X size={24} />
+        <X
+          size={24}
+          onClick={() => {
+            setFormInput({
+              ...formInput,
+              preview: false,
+            })
+          }}
+        />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
-  );
+  ) : null
 }
 
-export default Toast;
+export default Toast

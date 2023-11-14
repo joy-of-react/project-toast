@@ -1,7 +1,6 @@
 import React from 'react'
-
+import Toast from '../Toast'
 import Button from '../Button'
-
 import styles from './ToastPlayground.module.css'
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error']
@@ -10,6 +9,7 @@ function ToastPlayground() {
   const [formInput, setFormInput] = React.useState({
     message: '',
     variant: '',
+    preview: false,
   })
 
   const handleChange = (event) => {
@@ -24,6 +24,10 @@ function ToastPlayground() {
   const handleSubmit = (event) => {
     event.preventDefault()
 
+    setFormInput({
+      ...formInput,
+      preview: true,
+    })
     console.log('Submitting form with values:', formInput)
   }
 
@@ -33,7 +37,7 @@ function ToastPlayground() {
         <img alt='Cute toast mascot' src='/toast.png' />
         <h1>Toast Playground</h1>
       </header>
-
+      <Toast formInput={formInput} setFormInput={setFormInput} />
       <form onSubmit={handleSubmit}>
         <div className={styles.controlsWrapper}>
           <div className={styles.row}>
