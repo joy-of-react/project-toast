@@ -2,44 +2,14 @@ import React from 'react'
 import ToastShelf from '../ToastShelf'
 import Button from '../Button'
 import styles from './ToastPlayground.module.css'
+import { ToastContext } from '../ToastProvider'
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error']
 
 function ToastPlayground() {
-  const [toasts, setToasts] = React.useState([])
-  const [formInput, setFormInput] = React.useState({
-    message: '',
-    variant: 'notice',
-  })
+  const { toasts, setToasts, formInput, handleChange, handleSubmit } =
+    React.useContext(ToastContext)
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
-
-    setFormInput({
-      ...formInput,
-      [name]: value,
-    })
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-
-    if (!formInput.message || !formInput.variant) {
-      return
-    }
-
-    const newToast = {
-      ...formInput,
-      id: crypto.randomUUID(),
-    }
-
-    setToasts([...toasts, newToast])
-    setFormInput({
-      message: '',
-      variant: 'notice',
-    })
-  }
-  console.log(formInput)
   return (
     <div className={styles.wrapper}>
       <header>
