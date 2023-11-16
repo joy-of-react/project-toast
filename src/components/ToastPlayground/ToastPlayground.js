@@ -7,8 +7,11 @@ import { ToastContext } from '../ToastProvider'
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error']
 
 function ToastPlayground() {
-  const { toasts, setToasts, formInput, handleChange, handleSubmit } =
-    React.useContext(ToastContext)
+  const {
+    formInput: { message, variant },
+    handleChange,
+    handleSubmit,
+  } = React.useContext(ToastContext)
 
   return (
     <div className={styles.wrapper}>
@@ -16,7 +19,7 @@ function ToastPlayground() {
         <img alt='Cute toast mascot' src='/toast.png' />
         <h1>Toast Playground</h1>
       </header>
-      <ToastShelf toasts={toasts} setToasts={setToasts} />
+      <ToastShelf />
       <form onSubmit={handleSubmit}>
         <div className={styles.controlsWrapper}>
           <div className={styles.row}>
@@ -32,7 +35,7 @@ function ToastPlayground() {
                 id='message'
                 name='message'
                 className={styles.messageInput}
-                value={formInput.message}
+                value={message}
                 onChange={handleChange}
               />
             </div>
@@ -49,7 +52,7 @@ function ToastPlayground() {
                     name='variant'
                     value={option}
                     onChange={handleChange}
-                    checked={formInput.variant === option}
+                    checked={variant === option}
                   />
                   {option}
                 </label>
