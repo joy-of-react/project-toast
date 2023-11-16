@@ -1,15 +1,15 @@
 import React from 'react'
-import Toast from '../Toast'
+import ToastShelf from '../ToastShelf'
 import Button from '../Button'
 import styles from './ToastPlayground.module.css'
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error']
 
 function ToastPlayground() {
+  const [toasts, setToasts] = React.useState([])
   const [formInput, setFormInput] = React.useState({
     message: '',
-    variant: '',
-    preview: false,
+    variant: 'notice',
   })
 
   const handleChange = (event) => {
@@ -24,20 +24,29 @@ function ToastPlayground() {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    setFormInput({
-      ...formInput,
-      preview: true,
-    })
-    console.log('Submitting form with values:', formInput)
-  }
+    if (!formInput.message || !formInput.variant) {
+      return
+    }
 
+    const newToast = {
+      ...formInput,
+      id: crypto.randomUUID(),
+    }
+
+    setToasts([...toasts, newToast])
+    setFormInput({
+      message: '',
+      variant: 'notice',
+    })
+  }
+  console.log(formInput)
   return (
     <div className={styles.wrapper}>
       <header>
         <img alt='Cute toast mascot' src='/toast.png' />
         <h1>Toast Playground</h1>
       </header>
-      <Toast formInput={formInput} setFormInput={setFormInput} />
+      <ToastShelf toasts={toasts} setToasts={setToasts} />
       <form onSubmit={handleSubmit}>
         <div className={styles.controlsWrapper}>
           <div className={styles.row}>
@@ -62,16 +71,17 @@ function ToastPlayground() {
           <div className={styles.row}>
             <div className={styles.label}>Variant</div>
             <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-              {VARIANT_OPTIONS.map((variant) => (
-                <label htmlFor='variant-notice' key={variant}>
+              {VARIANT_OPTIONS.map((option) => (
+                <label htmlFor='variant-notice' key={option}>
                   <input
                     id='variant-notice'
                     type='radio'
                     name='variant'
-                    value={variant}
+                    value={option}
                     onChange={handleChange}
+                    checked={formInput.variant === option}
                   />
-                  {variant}
+                  {option}
                 </label>
               ))}
             </div>
