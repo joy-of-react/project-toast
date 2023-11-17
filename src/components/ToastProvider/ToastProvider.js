@@ -9,6 +9,18 @@ function ToastProvider({ children }) {
     variant: 'notice',
   })
 
+  React.useEffect(() => {
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setToasts([])
+      }
+    })
+
+    return () => {
+      document.removeEventListener('keydown', () => {})
+    }
+  }, [])
+
   const handleChange = (event) => {
     const { name, value } = event.target
 
