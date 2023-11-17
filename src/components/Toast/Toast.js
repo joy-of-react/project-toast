@@ -26,16 +26,20 @@ function Toast({ id, variant, children }) {
       <div className={styles.iconContainer}>
         <Variant size={24} />
       </div>
-      <p className={styles.content}>{children}</p>
+      <p className={styles.content}>
+        <VisuallyHidden>{variant} -</VisuallyHidden>
+        {children}
+      </p>
       <button
         className={styles.closeButton}
         onClick={() => {
           const updatedToasts = toasts.filter((toast) => toast.id !== id)
           setToasts(updatedToasts)
         }}
+        aria-label='Dismiss message'
+        aria-live='off'
       >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
   )
