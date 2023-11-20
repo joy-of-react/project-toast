@@ -1,8 +1,7 @@
 import React from "react";
 
 import Button from "../Button";
-import Toast from "../Toast";
-
+import ToastShelf from "../ToastShelf";
 import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
@@ -10,7 +9,25 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState("notice");
-  const [isToastOpen, toogleIsToastOpen] = React.useState(false);
+  const [toastList, setToastList] = React.useState([]);
+
+  const addToastItem = (message, variant) => {
+    const newItem = {
+      message,
+      variant,
+      id: Math.random(),
+    };
+    const nextList = [...toastList, newItem];
+    setToastList(nextList);
+  };
+
+  const handleDismiss = (id) => {
+    const nextToasts = toastList.filter((toast) => {
+      return toast.id !== id;
+    });
+
+    setToastList(nextToasts);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -19,15 +36,19 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      {isToastOpen && (
-        <Toast
-          content={message}
-          handleDismiss={() => toogleIsToastOpen(false)}
-          variant={variant}
-        ></Toast>
-      )}
+      <ToastShelf data={toastList} handleDismiss={handleDismiss}></ToastShelf>
 
-      <div className={styles.controlsWrapper}>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+
+          addToastItem(message, variant);
+
+          setMessage("");
+          setVariant("");
+        }}
+        className={styles.controlsWrapper}
+      >
         <div className={styles.row}>
           <label
             htmlFor="message"
@@ -69,10 +90,10 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button onClick={() => toogleIsToastOpen(true)}>Pop Toast!</Button>
+            <Button>Pop Toast!</Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
