@@ -8,7 +8,6 @@ export function useKeyDown(key, callback) {
       }
     }
 
-    console.log('useKeyDown')
     document.addEventListener('keydown', handleKeyDown)
 
     return () => {
