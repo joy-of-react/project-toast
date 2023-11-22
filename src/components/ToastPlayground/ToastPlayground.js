@@ -9,7 +9,21 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState("notice");
-  const { addToastItem } = React.useContext(ToastContext);
+  const { addToastItem, setToastList } = React.useContext(ToastContext);
+
+  React.useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.code === "Escape") {
+        setToastList([]);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [setToastList]);
 
   return (
     <div className={styles.wrapper}>
@@ -65,7 +79,6 @@ function ToastPlayground() {
                 {option}
               </label>
             ))}
-            {/* TODO Other Variant radio buttons here */}
           </div>
         </div>
 
