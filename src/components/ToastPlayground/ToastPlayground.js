@@ -4,12 +4,12 @@ import Button from '../Button';
 
 import styles from './ToastPlayground.module.css';
 
-import VariantInputs from '../VariantInputs/VariantInputs';
-
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
   const [value, setValue] = React.useState('');
+  const [variant, setVariant] = React.useState();
+
   return (
     <div className={styles.wrapper}>
       <header>
@@ -36,6 +36,7 @@ function ToastPlayground() {
             <textarea
               id="message"
               className={styles.messageInput}
+              style={{ resize: 'none' }}
               value={value}
               onChange={(e) => setValue(e.target.value)}
             />
@@ -44,15 +45,31 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label}>Variant</div>
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            {VARIANT_OPTIONS.map((variant) => {
-              return <VariantInputs key={variant} variant={variant} />;
+            {VARIANT_OPTIONS.map((option) => {
+              const id = `variant-${option}`;
+              return (
+                <label key={id} htmlFor={id}>
+                  <input
+                    type="radio"
+                    id={id}
+                    key={id}
+                    name="variant"
+                    value={option}
+                    checked={variant === option}
+                    onChange={(e) => setVariant(e.target.value)}
+                  />
+                  {option}
+                </label>
+              );
             })}
           </div>
         </div>
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => window.alert(`${variant} - ${value}`)}>
+              Pop Toast!
+            </Button>
           </div>
         </div>
       </form>
