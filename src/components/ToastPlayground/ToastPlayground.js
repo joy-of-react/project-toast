@@ -9,8 +9,12 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
   const [value, setValue] = React.useState('');
-  const [variant, setVariant] = React.useState('');
-  const [showingToast, setShowToast] = React.useState(false);
+  const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
+  const [isShowing, setIsShowing] = React.useState(false);
+
+  const handleDismiss = () => {
+    setIsShowing(false);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -19,14 +23,18 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      {showingToast && <Toast variant={variant} value={value} />}
+      {isShowing && (
+        <Toast variant={variant} handleDismiss={handleDismiss}>
+          {value}
+        </Toast>
+      )}
 
       <form
         className={styles.controlsWrapper}
         onSubmit={(e) => {
           e.preventDefault();
           setValue('');
-          setShowToast(true);
+          setIsShowing(true);
         }}
       >
         <div className={styles.row}>
@@ -72,7 +80,7 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => setIsShowing(true)}>Pop Toast!</Button>
           </div>
         </div>
       </form>
