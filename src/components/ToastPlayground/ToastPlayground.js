@@ -10,6 +10,12 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
 
+  const [selectedVariant, setSelectedVariant] = React.useState(
+    VARIANT_OPTIONS[0]
+  );
+
+  console.log(selectedVariant);
+
   return (
     <div className={styles.wrapper}>
       <header>
@@ -41,7 +47,12 @@ function ToastPlayground() {
           {VARIANT_OPTIONS &&
             VARIANT_OPTIONS.length > 0 &&
             VARIANT_OPTIONS.map((variant) => (
-              <RadioButton key={variant} variant={variant} />
+              <RadioButton
+                key={variant}
+                variant={variant}
+                checked={variant === selectedVariant}
+                onChange={(event) => setSelectedVariant(event.target.value)}
+              />
             ))}
         </div>
 
