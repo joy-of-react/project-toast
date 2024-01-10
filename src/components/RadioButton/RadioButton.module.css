@@ -1,0 +1,12 @@
+.radioWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  
+  .radioWrapper label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100px;
+  }

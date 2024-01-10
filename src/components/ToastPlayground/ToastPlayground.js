@@ -2,7 +2,8 @@ import React from 'react';
 
 import Button from '../Button';
 
-import styles from './ToastPlayground.module.css';
+import RadioButton from "../RadioButton/RadioButton";
+import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
@@ -30,28 +31,16 @@ function ToastPlayground() {
 
         <div className={styles.row}>
           <div className={styles.label}>Variant</div>
-          <div
-            className={`${styles.inputWrapper} ${styles.radioWrapper}`}
-          >
-            <label htmlFor="variant-notice">
-              <input
-                id="variant-notice"
-                type="radio"
-                name="variant"
-                value="notice"
-              />
-              notice
-            </label>
-
-            {/* TODO Other Variant radio buttons here */}
-          </div>
+          {VARIANT_OPTIONS &&
+            VARIANT_OPTIONS.length > 0 &&
+            VARIANT_OPTIONS.map((variant) => (
+              <RadioButton key={variant} variant={variant} />
+            ))}
         </div>
 
         <div className={styles.row}>
           <div className={styles.label} />
-          <div
-            className={`${styles.inputWrapper} ${styles.radioWrapper}`}
-          >
+          <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
             <Button>Pop Toast!</Button>
           </div>
         </div>
