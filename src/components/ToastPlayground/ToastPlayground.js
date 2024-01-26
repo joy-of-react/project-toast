@@ -3,8 +3,8 @@ import React from "react";
 import Button from "../Button";
 
 import RadioButton from "../RadioButton/RadioButton";
-import Toast from "../Toast/Toast";
 import styles from "./ToastPlayground.module.css";
+import ToastShelf from "../ToastShelf/ToastShelf";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
@@ -28,12 +28,18 @@ function ToastPlayground() {
     setSelectedVariant(VARIANT_OPTIONS[0]);
   };
 
+  const handleDismiss = (id) => {
+    const newToasts = toasts.filter((toast) => toast.id !== id);
+    setToasts(newToasts);
+  };
+
   return (
     <div className={styles.wrapper}>
       <header>
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+      <ToastShelf toasts={toasts} handleDismiss={handleDismiss} />
       <form onSubmit={handleSubmit} className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
