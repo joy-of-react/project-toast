@@ -5,33 +5,19 @@ import Button from "../Button";
 import RadioButton from "../RadioButton/RadioButton";
 import styles from "./ToastPlayground.module.css";
 import ToastShelf from "../ToastShelf/ToastShelf";
-
-const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
+import { ToastContext } from "../ToastProvider/ToastProvider";
 
 function ToastPlayground() {
-  const [message, setMessage] = React.useState("");
-
-  const [selectedVariant, setSelectedVariant] = React.useState(
-    VARIANT_OPTIONS[0]
-  );
-
-  const [toasts, setToasts] = React.useState([]);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newToasts = [
-      ...toasts,
-      { id: crypto.randomUUID(), message: message, variant: selectedVariant },
-    ];
-    setToasts(newToasts);
-    setMessage("");
-    setSelectedVariant(VARIANT_OPTIONS[0]);
-  };
-
-  const handleDismiss = (id) => {
-    const newToasts = toasts.filter((toast) => toast.id !== id);
-    setToasts(newToasts);
-  };
+  const {
+    message,
+    selectedVariant,
+    toasts,
+    setMessage,
+    setSelectedVariant,
+    handleDismiss,
+    handleSubmit,
+    VARIANT_OPTIONS,
+  } = React.useContext(ToastContext);
 
   return (
     <div className={styles.wrapper}>
