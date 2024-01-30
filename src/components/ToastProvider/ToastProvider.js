@@ -33,6 +33,7 @@ function ToastProvider({ children }) {
         message,
         selectedVariant,
         toasts,
+        setToasts,
         setMessage,
         setSelectedVariant,
         handleDismiss,
