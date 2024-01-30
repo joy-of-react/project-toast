@@ -22,7 +22,12 @@ function ToastShelf() {
   });
 
   return (
-    <ol className={styles.wrapper}>
+    <ol
+      role="region"
+      aria-live="polite"
+      aria-label="Notification"
+      className={styles.wrapper}
+    >
       {toasts.length > 0 &&
         toasts.map((toast) => {
           return (

@@ -17,10 +17,17 @@ function Toast({ id, variant, children }) {
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>{getIcon(variant)}</div>
-      <p className={styles.content}>{children}</p>
-      <button onClick={() => handleDismiss(id)} className={styles.closeButton}>
+      <p className={styles.content}>
+        <VisuallyHidden>{variant} - </VisuallyHidden>
+        {children}
+      </p>
+      <button
+        aria-live="off"
+        aria-label="Dismiss"
+        onClick={() => handleDismiss(id)}
+        className={styles.closeButton}
+      >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
   );
