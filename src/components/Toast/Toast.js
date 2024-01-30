@@ -12,13 +12,6 @@ import VisuallyHidden from "../VisuallyHidden";
 import styles from "./Toast.module.css";
 import { ToastContext } from "../ToastProvider/ToastProvider";
 
-const ICONS_BY_VARIANT = {
-  notice: Info,
-  warning: AlertTriangle,
-  success: CheckCircle,
-  error: AlertOctagon,
-};
-
 function Toast({ id, variant, children }) {
   const { handleDismiss } = React.useContext(ToastContext);
   return (
