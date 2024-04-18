@@ -1,61 +1,69 @@
 .toast {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border-radius: 16px;
-  color: black;
-  color-scheme: light;
-  background: white;
-  max-width: 100%;
-  width: 350px;
-  box-shadow: var(--shadow-elevation-medium);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 16px;
+    color: black;
+    color-scheme: light;
+    background: white;
+    max-inline-size: 100%;
+    width: 350px;
+    box-shadow: var(--shadow-elevation-medium);
 }
 
 .content {
-  flex: 1;
-  padding: 12px 0px;
-  font-weight: 600;
+    flex: 1;
+    padding: 12px 0px;
+    font-weight: 600;
 }
 
 .iconContainer {
-  flex-shrink: 0;
-  padding: 16px;
-  padding-right: 0px;
+    flex-shrink: 0;
+    padding: 16px;
+    padding-inline-end: 0px;
 }
+
 .iconContainer svg {
-  display: block;
+    display: block;
 }
 
 .closeButton {
-  flex-shrink: 0;
-  border: none;
-  background: transparent;
-  padding: 16px;
-  cursor: pointer;
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    padding: 16px;
+    cursor: pointer;
 }
 
 .notice {
-  background: var(--color-notice-bg);
+    background: var(--color-notice-bg);
 }
+
 .notice .iconContainer {
-  color: var(--color-notice);
+    color: var(--color-notice);
 }
+
 .warning {
-  background: var(--color-warning-bg);
+    background: var(--color-warning-bg);
 }
+
 .warning .iconContainer {
-  color: var(--color-warning);
+    color: var(--color-warning);
 }
+
 .success {
-  background: var(--color-success-bg);
+    background: var(--color-success-bg);
 }
+
 .success .iconContainer {
-  color: var(--color-success);
+    color: var(--color-success);
 }
+
 .error {
-  background: var(--color-error-bg);
+    background: var(--color-error-bg);
 }
+
 .error .iconContainer {
-  color: var(--color-error);
+    color: var(--color-error);
 }
