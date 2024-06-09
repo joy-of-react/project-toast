@@ -13,9 +13,15 @@ function ToastProvider({ children }) {
     setToasts((prev) => [...prev, { variant, message, id: Math.random() }]);
   }
 
+  function handleDismissAll(event) {
+    if (event.key === "Escape") {
+      setToasts([]);
+    }
+  }
+
   const contextValue = React.useMemo(() => {
-    return { toasts, handleDismissToast, handleAddToast };
-  }, [toasts, handleDismissToast, handleAddToast]);
+    return { toasts, handleDismissAll, handleDismissToast, handleAddToast };
+  }, [toasts, handleDismissAll, handleDismissToast, handleAddToast]);
 
   return (
     <ToastContext.Provider value={contextValue}>
