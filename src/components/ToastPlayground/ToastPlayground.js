@@ -3,21 +3,26 @@ import React from "react";
 import Button from "../Button";
 
 import styles from "./ToastPlayground.module.css";
-import Toast from "../Toast/Toast";
+import ToastShelf from "../ToastShelf/ToastShelf";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
-  const [variant, setVariant] = React.useState("");
-  const [isToastOpen, setToastOpen] = React.useState(false);
+  const [variant, setVariant] = React.useState("notice");
 
-  function handleDismissToast() {
-    setToastOpen(false);
+  const [toasts, setToasts] = React.useState([]);
+
+  function handleDismissToast(id) {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
   }
 
-  function handleOpenToast() {
-    setToastOpen(true);
+  function handleOpenToast(event) {
+    event.preventDefault();
+
+    setToasts((prev) => [...prev, { variant, message, id: Math.random() }]);
+    setVariant("notice");
+    setMessage("");
   }
 
   return (
@@ -27,14 +32,9 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <Toast
-        message={message}
-        variant={variant}
-        isOpen={isToastOpen}
-        onDismiss={handleDismissToast}
-      />
+      <ToastShelf items={toasts} onDismiss={handleDismissToast} />
 
-      <div className={styles.controlsWrapper}>
+      <form onSubmit={handleOpenToast} className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
             htmlFor="message"
@@ -45,6 +45,7 @@ function ToastPlayground() {
           </label>
           <div className={styles.inputWrapper}>
             <textarea
+              required
               id="message"
               className={styles.messageInput}
               value={message}
@@ -77,10 +78,10 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button onClick={handleOpenToast}>Pop Toast!</Button>
+            <Button>Pop Toast!</Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
