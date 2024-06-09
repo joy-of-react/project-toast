@@ -6,15 +6,7 @@ import useToastContext from "../ToastProvider/useToastContext";
 import VisuallyHidden from "../VisuallyHidden";
 
 function ToastShelf() {
-  const { toasts, handleDismissAll, handleDismissToast } = useToastContext();
-
-  React.useEffect(() => {
-    window.addEventListener("keydown", handleDismissAll);
-
-    return () => {
-      window.removeEventListener("keydown", handleDismissAll);
-    };
-  }, [handleDismissAll]);
+  const { toasts, handleDismissToast } = useToastContext();
 
   return (
     <ol
