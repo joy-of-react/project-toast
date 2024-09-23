@@ -29,7 +29,9 @@ function Toast({ message, variant, forceShow, setForceShow }) {
         <p className={styles.content}>{message}</p>
         <button
           className={styles.closeButton}
-          onClick={() => setForceShow(false)}
+          onClick={() => {
+            setForceShow(false);
+          }}
         >
           <X size={24} />
           {/* <VisuallyHidden forceShow={forceShow} setForceShow={setForceShow}> */}

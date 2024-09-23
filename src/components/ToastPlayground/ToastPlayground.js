@@ -3,7 +3,7 @@ import React from "react";
 import Button from "../Button";
 
 import styles from "./ToastPlayground.module.css";
-import Toast from "../Toast";
+// import Toast from "../Toast";
 import ToastShelf from "../ToastShelf";
 import VisuallyHidden from "../VisuallyHidden";
 
@@ -11,7 +11,7 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
-  const [variant, setVariant] = React.useState("");
+  const [variant, setVariant] = React.useState("notice");
   const [forceShow, setForceShow] = React.useState(false);
   const [toasts, setToasts] = React.useState([]);
 
@@ -56,6 +56,7 @@ function ToastPlayground() {
                 type="radio"
                 name="variant"
                 value="notice"
+                checked={variant === "notice"}
                 onChange={(event) => setVariant(event.target.value)}
               />
               notice
@@ -67,6 +68,7 @@ function ToastPlayground() {
                 type="radio"
                 name="variant"
                 value="warning"
+                checked={variant === "warning"}
                 onChange={(event) => setVariant(event.target.value)}
               />
               warning
@@ -78,6 +80,7 @@ function ToastPlayground() {
                 type="radio"
                 name="variant"
                 value="success"
+                checked={variant === "success"}
                 onChange={(event) => setVariant(event.target.value)}
               />
               success
@@ -89,6 +92,7 @@ function ToastPlayground() {
                 type="radio"
                 name="variant"
                 value="error"
+                checked={variant === "error"}
                 onChange={(event) => setVariant(event.target.value)}
               />
               error
@@ -109,6 +113,8 @@ function ToastPlayground() {
                 const nextToasts = [...toasts, newToast];
                 setToasts(nextToasts);
                 setForceShow(true);
+                setMessage("");
+                setVariant("notice");
               }}
             >
               {" "}
