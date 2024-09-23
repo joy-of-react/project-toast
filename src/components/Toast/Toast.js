@@ -18,7 +18,7 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ message, variant, forceShow, setForceShow }) {
+function Toast({ message, variant, id, toasts, setToasts }) {
   const theClassName = `${styles.toast} ${styles[variant]}`;
   const IconComponent = ICONS_BY_VARIANT[variant];
 
@@ -30,7 +30,8 @@ function Toast({ message, variant, forceShow, setForceShow }) {
         <button
           className={styles.closeButton}
           onClick={() => {
-            setForceShow(false);
+            const nextToasts = toasts.filter((item) => item.id != id);
+            setToasts((currentValue) => nextToasts);
           }}
         >
           <X size={24} />
