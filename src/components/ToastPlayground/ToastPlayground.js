@@ -104,7 +104,7 @@ function ToastPlayground() {
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
             <Button
-              onClick={(event) => {
+              onClick={() => {
                 const newToast = {
                   message: message,
                   variant: variant,
