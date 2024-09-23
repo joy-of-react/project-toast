@@ -4,6 +4,7 @@ import Button from "../Button";
 
 import styles from "./ToastPlayground.module.css";
 import Toast from "../Toast";
+import ToastShelf from "../ToastShelf";
 import VisuallyHidden from "../VisuallyHidden";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
@@ -12,6 +13,7 @@ function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState("");
   const [forceShow, setForceShow] = React.useState(false);
+  const [toasts, setToasts] = React.useState([]);
 
   return (
     <div className={styles.wrapper}>
@@ -22,12 +24,7 @@ function ToastPlayground() {
 
       {forceShow && (
         <VisuallyHidden forceShow={forceShow} setForceShow={setForceShow}>
-          <Toast
-            message={message}
-            variant={variant}
-            forceShow={forceShow}
-            setForceShow={setForceShow}
-          />
+          <ToastShelf toasts={toasts} />
         </VisuallyHidden>
       )}
 
@@ -102,7 +99,21 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button onClick={() => setForceShow(true)}> Pop Toast!</Button>
+            <Button
+              onClick={(event) => {
+                const newToast = {
+                  message: message,
+                  variant: variant,
+                  id: crypto.randomUUID(),
+                };
+                const nextToasts = [...toasts, newToast];
+                setToasts(nextToasts);
+                setForceShow(true);
+              }}
+            >
+              {" "}
+              Pop Toast!
+            </Button>
           </div>
         </div>
       </div>
