@@ -1,16 +1,16 @@
 import React from 'react';
 
 import Button from '../Button';
-
+import Toast from '../Toast/Toast'
 import styles from './ToastPlayground.module.css';
+import useToggle from "../../utils/useToggle"
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
   const [message, setMessage] = React.useState("")
   const [optionValue, setOptionValue] = React.useState('notice')
-
-
+  const [isToastOpen, toggleIsToastOpen] = useToggle(false)
 
   return (
     <div className={styles.wrapper}>
@@ -18,7 +18,12 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-
+      {
+        isToastOpen &&
+        <Toast variant={optionValue} toggleIsToastOpen={toggleIsToastOpen}>
+          {message}
+          </Toast>
+      }
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
@@ -63,7 +68,7 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button>Pop Toast!</Button>
+            <Button onClick={toggleIsToastOpen}>Pop Toast!</Button>
           </div>
         </div>
       </div>
