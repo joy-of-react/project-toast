@@ -4,13 +4,49 @@ import Button from '../Button';
 import Toast from '../Toast/Toast'
 import styles from './ToastPlayground.module.css';
 import useToggle from "../../utils/useToggle"
+import ToastShelf from '../ToastShelf/ToastShelf'
+
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
   const [message, setMessage] = React.useState("")
-  const [optionValue, setOptionValue] = React.useState('notice')
-  const [isToastOpen, toggleIsToastOpen] = useToggle(false)
+  const [variant, setVariant] = React.useState('notice')
+  // const [isToastOpen, toggleIsToastOpen] = useToggle(false)
+  const [toasts, setToasts] = React.useState([
+    {
+      id: crypto.randomUUID(),
+      message: 'Please enter the information',
+      variant: 'error'
+    },
+    {
+      id: crypto.randomUUID(),
+      message: 'Please enter the information',
+      variant: 'notice'
+    }
+  ])
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (message !== '' && variant !== '') {
+      setToasts([
+        ...toasts,
+        {
+          id: crypto.randomUUID(),
+          message: message,
+          variant: variant,
+        }
+      ])
+    }
+    setMessage('')
+    setVariant('')
+  }
+
+  function handleDismiss(id) {
+    const nextToasts = toasts.filter(toast => {return toast.id !== id})
+    setToasts(nextToasts)
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -18,13 +54,10 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-      {
-        isToastOpen &&
-        <Toast variant={optionValue} toggleIsToastOpen={toggleIsToastOpen}>
-          {message}
-          </Toast>
-      }
-      <div className={styles.controlsWrapper}>
+      <ToastShelf toasts={toasts} handleDismiss={handleDismiss}/>
+      <form className={styles.controlsWrapper}
+        onSubmit={handleSubmit}
+      >
         <div className={styles.row}>
           <label
             htmlFor="message"
@@ -53,13 +86,12 @@ function ToastPlayground() {
                   name='variant'
                   value={option}
                   key={`variat-${option}`}
-                  onChange={(e) => setOptionValue(e.target.value)}
-                  checked={optionValue === option}
+                  onChange={(e) => setVariant(e.target.value)}
+                  checked={variant === option}
                 />
                 {option}
               </label>
             ))}
-            {/* TODO Other Variant radio buttons here: 'warning', 'success', 'error' */}
           </div>
         </div>
 
@@ -68,10 +100,10 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button onClick={toggleIsToastOpen}>Pop Toast!</Button>
+            <Button type='submit' >Pop Toast!</Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
