@@ -1,7 +1,7 @@
 .toast {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
   border-radius: 16px;
   color: black;
@@ -14,7 +14,7 @@
 
 .content {
   flex: 1;
-  padding: 12px 0px;
+  padding: 14px 0px;
   font-weight: 600;
   overflow: auto;
 }
