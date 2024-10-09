@@ -16,6 +16,7 @@
   flex: 1;
   padding: 12px 0px;
   font-weight: 600;
+  overflow: auto;
 }
 
 .iconContainer {
