@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "../Button";
+import Toast from "../Toast";
 
 import styles from "./ToastPlayground.module.css";
 
@@ -11,12 +12,20 @@ function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   // create state for variant radiobuttons
   const [variantType, setVariantType] = React.useState("");
+  // create state for opening and closing Toast
+  const [isOpen, setIsOpen] = React.useState(false);
   return (
     <div className={styles.wrapper}>
       <header>
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      {isOpen && (
+        <Toast handleDismiss={() => setIsOpen(false)} variant={variantType}>
+          {message}
+        </Toast>
+      )}
 
       {/**
        * Message textarea content here
@@ -52,6 +61,7 @@ function ToastPlayground() {
               <div key={variant}>
                 <label htmlFor={`variant-${variant}`}>
                   <input
+                    required={true}
                     type="radio"
                     name="variant"
                     id={`variant-${variant}`}
@@ -71,7 +81,7 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => setIsOpen(true)}>Pop Toast!</Button>
           </div>
         </div>
       </div>
