@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import ToastShelf from "../ToastShelf";
 import Button from "../Button";
 import { ToastContext } from "../ToastProvider";
 import styles from "./ToastPlayground.module.css";
-
+import useEscapeKey from "../../hooks/useEscapeKey";
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
@@ -11,7 +11,11 @@ function ToastPlayground() {
   const [content, setContent] = useState("");
   const { setList } = useContext(ToastContext);
 
-  useEscapeAllToast(setList);
+  const clearToast = useCallback(() => {
+    setList([]);
+  }, [setList]);
+
+  useEscapeKey(clearToast);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -94,19 +98,6 @@ function ToastPlayground() {
       </div>
     </div>
   );
-}
-
-function useEscapeAllToast(setList) {
-  useEffect(() => {
-    const removeAllToast = (e) => {
-      if (e.key === "Escape") {
-        setList([]);
-      }
-    };
-    window.addEventListener("keydown", removeAllToast);
-
-    return () => window.removeEventListener("keydown", removeAllToast);
-  }, [setList]);
 }
 
 export default ToastPlayground;
