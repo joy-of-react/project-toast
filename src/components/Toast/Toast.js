@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AlertOctagon,
   AlertTriangle,
@@ -18,19 +18,16 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ setIsShowToast, content, type }) {
-  const Icon = ICONS_BY_VARIANT[type];
+function Toast({ setIsShow, content, variant, id }) {
+  const Icon = ICONS_BY_VARIANT[variant];
 
   return (
-    <div className={`${styles.toast} ${styles[type]}`}>
+    <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
         <Icon size={24} />
       </div>
       <p className={styles.content}>{content}</p>
-      <button
-        onClick={() => setIsShowToast(false)}
-        className={styles.closeButton}
-      >
+      <button onClick={() => setIsShow(id)} className={styles.closeButton}>
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
