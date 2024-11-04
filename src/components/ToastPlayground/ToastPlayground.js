@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ToastShelf from "../ToastShelf";
 import Button from "../Button";
-
+import { ToastContext } from "../ToastProvider";
 import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
@@ -9,7 +9,7 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [selectNoticeType, setSelectNoticeType] = useState(VARIANT_OPTIONS[0]);
   const [content, setContent] = useState("");
-  const [list, setList] = useState([]);
+  const { setList } = useContext(ToastContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,13 +18,12 @@ function ToastPlayground() {
       return;
     }
 
-    setList([
+    setList((list) => [
       ...list,
       {
         content,
         variant: selectNoticeType,
         id: crypto.randomUUID(),
-        setIsShow: (id) => setList((list) => list.filter((p) => p.id !== id)),
       },
     ]);
     setSelectNoticeType(VARIANT_OPTIONS[0]);
@@ -38,7 +37,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf list={list} />
+      <ToastShelf />
 
       <div className={styles.controlsWrapper}>
         <form onSubmit={handleSubmit}>
