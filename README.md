@@ -114,7 +114,7 @@ If you get stuck, you may wish to review the following lessons from the course:
 
 - The toast component should show the message entered in the textarea, essentially acting as a “live preview”.
 - The toast's styling should be affected by the “variant” selected:
-  - The colors can be set by specifying the appropriate class on the top-level `<div>`. By default, it's set to `styles.notice`, but you'll want to dynamically select the class based on the variant (eg. for a success toast, you'll want to apply `styles.success`).
+  - The colors can be set by specifying the appropriate class on the top-level `<div>`. By default, it's set to `styles.notice`, but you'll want to dynamically select the class based on the variant (e.g., for a success toast, you'll want to apply `styles.success`).
   - The icon can be selected from the `ICONS_BY_VARIANT` object. Feel free to re-organize things however you wish!
 - The toast should be hidden by default, but can be shown by clicking the "Pop Toast!” button.
 - The toast can be hidden by clicking the “×” button within the toast.
@@ -176,7 +176,7 @@ In this exercise, we'll refactor our application to use the [“Provider compone
 **Acceptance Criteria:**
 
 - Create a new component, `ToastProvider`, that will serve as the “keeper” for all toast-related state.
-  - To generate a new component, you can use the “new-component” script! Try tunning `npm run new-component ToastProvider` in the terminal.
+  - To generate a new component, you can use the “new-component” script! Try running `npm run new-component ToastProvider` in the terminal.
 - Components that require the state should pull it from context with the `useContext` hook, rather than passing through props.
 - As we saw in the [“Provider Components” lesson](https://courses.joshwcomeau.com/joy-of-react/04-component-design/08.04-provider-component), we can also share _functions_ that allow consumers to alter the state. Consider making functions available that will create a new toast, or dismiss a specific toast.
 - This is a “refactor” exercise. The user experience shouldn't change at all.
@@ -198,7 +198,7 @@ Let's try something. Pretend that you don't have a mouse or trackpad. Using the 
 
 **Give it a shot now, in browser.**
 
-**How do I do this?** You'll use the “Tab” key to move focus between interactive elements. You can hold "Shift" and hit "Tab" to move backwards. In order to dismiss the toasts, you'll need to keep tabbing until your focus reaches the close button. Then, hit "Enter".
+**How do I do this?** You'll use the <kbd>Tab</kbd> key to move focus between interactive elements. You can hold <kbd>Shift</kbd> and hit <kbd>Tab</kbd> to move backwards. In order to dismiss the toasts, you'll need to keep tabbing until your focus reaches the close button. Then, hit <kbd>Enter</kbd>.
 
 > NOTE: If you're using Safari or Firefox on MacOS, you'll need to toggle a system setting to allow tabs to focus on buttons. Read more here: https://www.scottohara.me/blog/2014/10/03/link-tabbing-firefox-osx.html
 
@@ -210,13 +210,13 @@ I found that this experience was pretty annoying. It was difficult to get the fo
 
 When we built a modal from scratch, we moved focus to within the modal, and trapped it there. This is a good idea for modals (which are urgent and blocking), but it's not the right approach for toasts (which are non-urgent and passive). Moving the user's focus is a pretty aggressive move, and not something we should do unless it's necessary.
 
-**So, here's what we should do:** Let's wire up the "Escape" key to automatically dismiss all toasts.
+**So, here's what we should do:** Let's wire up the <kbd>Escape</kbd> key to automatically dismiss all toasts.
 
-That way, we aren't interrupting the user. They can read the messages in their own time, and hit "Escape" to dismiss them, without them needing to fuss with tab navigation at all.
+That way, we aren't interrupting the user. They can read the messages in their own time, and hit <kbd>Escape</kbd> to dismiss them, without them needing to fuss with tab navigation at all.
 
 **Acceptance Criteria:**
 
-- Hitting the "Escape" key should dismiss all toasts
+- Hitting the <kbd>Escape</kbd> key should dismiss all toasts
 - You'll want to do this with a `useEffect` hook, but it's up to you to decide which component should bear this responsibility.
 
 ### 5.2: Screen reader users
@@ -279,7 +279,7 @@ Let's imagine we reach out to an accessibility specialist, and they do us the fa
 
 Whew! We've done quite a bit with this lil’ `Toast` component!
 
-In the previous exercise, we added an “escape” keyboard shortcut, to dismiss all toasts in a single keystroke. This is a very common pattern, and it requires a surprising amount of boilerplate in React.
+In the previous exercise, we added an <kbd>Escape</kbd> keyboard shortcut, to dismiss all toasts in a single keystroke. This is a very common pattern, and it requires a surprising amount of boilerplate in React.
 
 Let's build a **custom reusable hook** that makes it easy to reuse this boilerplate to solve future problems.
 
@@ -299,5 +299,5 @@ useEscapeKey(() => {
 - Because this is a generic hook, it shouldn't be stored with the `ToastProvider` component. Create a new `/src/hooks` directory, and place your new hook in there.
 - The `ToastProvider` component should use this new hook.
 - **Make sure there are no ESLint warnings.**
-  - The easiest way to see ESLint warnings is through the [ESLint VS Code extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint). With this extension installed, ESLint warnings are shown as squiggly yellow underlines. You can view the warning by hovering over the underlined characters, or by opening the “Problems” tab (`⌘` + `Shift` + `M`, or Ctrl + `Shift` + `M`).
+  - The easiest way to see ESLint warnings is through the [ESLint VS Code extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint). With this extension installed, ESLint warnings are shown as squiggly yellow underlines. You can view the warning by hovering over the underlined characters, or by opening the “Problems” tab (<kbd>⌘ Command</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>, or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>).
   - If you use another editor, you can search for the ESLint extension. Fortunately, ESLint is very popular, and extensions should exist for all common editors.
