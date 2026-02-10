@@ -1,18 +1,27 @@
-import React from 'react';
+import {createPortal} from "react-dom";
 
-import Toast from '../Toast';
-import styles from './ToastShelf.module.css';
+import Toast from "../Toast";
+import styles from "./ToastShelf.module.css";
 
-function ToastShelf() {
-  return (
-    <ol className={styles.wrapper}>
-      <li className={styles.toastWrapper}>
-        <Toast variant="notice">Example notice toast</Toast>
-      </li>
-      <li className={styles.toastWrapper}>
-        <Toast variant="error">Example error toast</Toast>
-      </li>
-    </ol>
+function ToastShelf({ toasts, dismiss }) {
+  return createPortal(
+    <ol
+      className={styles.wrapper}
+      role="region"
+      aria-live="polite"
+      aria-label="Notification"
+    >
+      {toasts.map((toast) => (
+        <li key={toast.id} className={styles.toastWrapper}>
+          <Toast
+            variant={toast.variant}
+            message={toast.message}
+            dismiss={() => dismiss(toast.id)}
+          />
+        </li>
+      ))}
+    </ol>,
+    document.getElementById("toast-root"),
   );
 }
 

@@ -106,3 +106,13 @@
   width: 100%;
   height: 4rem;
 }
+
+.validationMessage {
+  display: flex;
+  align-items: center;
+  gap: 4;
+  margin-top: 8px;
+  font-size: small;
+  height: 13px;
+  color: var(--color-error)
+}
