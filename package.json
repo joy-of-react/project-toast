@@ -14,7 +14,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-feather": "2.0.10",
-    "rimraf": "^5.0.1"
+    "rimraf": "^5.0.1",
+    "uuid": "^10.0.0"
   },
   "scripts": {
     "predev": "rimraf .parcel-cache dist",
